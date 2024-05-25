@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: "Breast Cancer Flask REST API"
+  description: "An API for predicting breast cancer type"
+  version: "0.0.1"
+  
+servers:
+  - url: "/"
+  
+paths:
+  /:
+    get:
+      operationId: "endpoints.hello_world"
+      tags:
+        - "hello_world"
+      summary: "Prints 'Hello world!'"
+      responses:
+        "200":
+          description: "Successfully printed 'Hello world!'"
+  /metadata_json:
+    get:
+      operationId: "endpoints.info_json"
+      tags:
+        - "hello_world"
+      summary: "Returns metadata as json"
+      responses:
+        "200":
+          description: "Successfully returned metadata"
+  /predict:
+    post:
+      operationId: "endpoints.predict"
+      tags:
+        - "predict"
+      summary: "Returns the predicted class"
+      description: "Returns the predicted breast cancer class using the predictive model in serve."
+      parameters:
+        - name: mean_concavity
+          in: query
+          description: "Description of mean concavity"
+          schema:
+            type: number
+          required: True
+        - name: worst_area
+          in: query
+          description: "Description of worst area"
+          schema:
+            type: number
+          required: True
+        - name: mean_area
+          in: query
+          description: "Description of mean area"
+          schema:
+            type: number
+          required: True
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  label:
+                    type: string
+                    description: "predicted label"
+                  class:
+                    type: string
+                    description: "the corresponding class name of the predicted label"
+                example:
+                  "label": "1"
+                  "class": "malignant"
