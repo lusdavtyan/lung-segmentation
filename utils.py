@@ -80,22 +80,20 @@ def visualize_data():
         None
 
     """
-    fig, ax = plt.subplots(5, 3, figsize=(5, 7))
+    fig, ax = plt.subplots(5, 2, figsize=(3, 7))
     for i in range(5):
         folder_index = random.randint(0, len(paths.PATH_LIST) - 1)
         slice_index = random.randint(0, len(paths.PATH_LIST[folder_index]) - 1)
         input_data, label_data = get_input_and_label(paths.PATH_LIST, folder_index, slice_index)
 
         ax[i, 0].imshow(input_data)
-        ax[i, 1].imshow(np.where(label_data == 0, 1, 0))
-        ax[i, 2].imshow(np.where(label_data == 1, 1, 0))
+        ax[i, 1].imshow(np.where(label_data == 1, 1, 0))
 
-        for j in range(3):
+        for j in range(2):
             ax[i, j].set_xticks([])
             ax[i, j].set_yticks([])
     ax[0, 0].set_title('CT Slice')
-    ax[0, 1].set_title('Background')
-    ax[0, 2].set_title('Lungs')
+    ax[0, 1].set_title('Lungs')
     plt.show()
 
 def get_volume_sizes(path_list):
