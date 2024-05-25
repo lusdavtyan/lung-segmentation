@@ -7,7 +7,7 @@ from PIL import Image
 import segmentation_models_pytorch as smp
 
 
-MODEL_PATH = os.path.join(os.path.dirname(os.getcwd()), 'models')
+MODEL_PATH = os.path.join(os.getcwd(), 'models')
 
 class SegmentationModel(nn.Module):
     """

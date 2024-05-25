@@ -200,15 +200,15 @@ class CTScansDataset(Dataset):
 
         """
         image_i = 0
-        sum = 0
+        size_sum = 0
         for i in range(len(self.data_indices)):
-            if idx < sum + self.volume_sizes[i]:
+            if idx < size_sum + self.volume_sizes[i]:
                 break
-            sum += self.volume_sizes[i]
+            size_sum += self.volume_sizes[i]
             image_i += 1
 
-        image = Image.open(paths.PATH_LIST[self.data_indices[image_i]][idx - sum][0])
-        label = Image.open(paths.PATH_LIST[self.data_indices[image_i]][idx - sum][1])
+        image = Image.open(paths.PATH_LIST[self.data_indices[image_i]][idx - size_sum][0])
+        label = Image.open(paths.PATH_LIST[self.data_indices[image_i]][idx - size_sum][1])
 
         if self.transform:
             image = self.transform(image)
